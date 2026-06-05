@@ -31,7 +31,7 @@ const store = {
 };
 
 const SEED_USERS = [
-  { id: "admin-1", email: "admin@almather.com", password: "Admin@123", fullName: "Abdullah Al-Harbi", department: "Internal Medicine", role: "admin", status: "approved" },
+  { id: "admin-1", email: "admin@almather.com", password: "Admin@123", fullName: "Abdullah Alsuhaim", department: "Internal Medicine", role: "admin", status: "approved" },
 ];
 
 function initStorage() {
