@@ -414,7 +414,7 @@ function DoctorDashboard({ setPage }) {
 function AdminDashboard({ setPage }) {
   const [tab, setTab] = useState("overview");
   const [viewConsult, setViewConsult] = useState(null);
-  const [tick, setTick] = useState(0);
+  const [, setTick] = useState(0);
   const refresh = () => setTick(t => t + 1);
 
   const allConsults = store.get("ccc_consults") || [];
