@@ -618,7 +618,7 @@ function ConsultForm({ currentUser, onSaved }) {
   );
 }
 
-function ConsultLog({ consults, onView, onStatusChange, admin }) {
+function ConsultLog({ consults, onView, onStatusChange, onDelete, admin }) {
   const [filterService, setFilterService] = useState("All");
   const [filterStatus, setFilterStatus] = useState("All");
   const [search, setSearch] = useState("");
@@ -654,11 +654,11 @@ function ConsultLog({ consults, onView, onStatusChange, admin }) {
         <div className="card" style={{ padding: 48, textAlign: "center", color: "#aaa", fontStyle: "italic" }}>No consults found.</div>
       ) : (
         <div className="card" style={{ overflow: "hidden" }}>
-          <div style={{ display: "grid", gridTemplateColumns: admin ? "90px 100px 1fr 1fr 110px 100px 90px" : "90px 100px 1fr 110px 100px 90px", padding: "10px 16px", background: AMH.green, color: AMH.light, fontFamily: "'DM Mono', monospace", fontSize: 10, letterSpacing: "0.08em", gap: 8 }}>
-            <div>DATE</div><div>MRN</div>{admin && <div>DOCTOR</div>}<div>SERVICE</div><div>RESPONSE</div><div>STATUS</div><div></div>
+          <div style={{ display: "grid", gridTemplateColumns: admin ? "90px 100px 1fr 1fr 110px 100px 90px 60px" : "90px 100px 1fr 110px 100px 90px", padding: "10px 16px", background: AMH.green, color: AMH.light, fontFamily: "'DM Mono', monospace", fontSize: 10, letterSpacing: "0.08em", gap: 8 }}>
+            <div>DATE</div><div>MRN</div>{admin && <div>DOCTOR</div>}<div>SERVICE</div><div>RESPONSE</div><div>STATUS</div><div></div>{admin && <div></div>}
           </div>
           {filtered.map((c, i) => (
-            <div key={c.id} className="hover-row" style={{ display: "grid", gridTemplateColumns: admin ? "90px 100px 1fr 1fr 110px 100px 90px" : "90px 100px 1fr 110px 100px 90px", padding: "13px 16px", borderBottom: `1px solid ${AMH.light}`, background: i % 2 === 0 ? "#fff" : AMH.pale, alignItems: "center", gap: 8 }} onClick={() => onView(c)}>
+            <div key={c.id} className="hover-row" style={{ display: "grid", gridTemplateColumns: admin ? "90px 100px 1fr 1fr 110px 100px 90px 60px" : "90px 100px 1fr 110px 100px 90px", padding: "13px 16px", borderBottom: `1px solid ${AMH.light}`, background: i % 2 === 0 ? "#fff" : AMH.pale, alignItems: "center", gap: 8 }} onClick={() => onView(c)}>
               <div style={{ fontFamily: "'DM Mono', monospace", fontSize: 11, color: "#888" }}>{c.date}</div>
               <div style={{ fontWeight: 700, fontSize: 14 }}>{c.mrn}</div>
               {admin && <div style={{ fontSize: 12, color: "#555" }}>{c.doctorName}</div>}
@@ -670,6 +670,13 @@ function ConsultLog({ consults, onView, onStatusChange, admin }) {
                   <option>Open</option><option>In Progress</option><option>Closed</option>
                 </select>
               </div>
+              {admin && (
+                <div onClick={e => e.stopPropagation()}>
+                  <button onClick={() => { if (window.confirm("Delete this consult?")) onDelete(c.id); }} style={{ background: "#fee2e2", color: "#dc2626", border: "none", borderRadius: 6, padding: "4px 8px", fontSize: 11, cursor: "pointer", fontFamily: "'DM Mono', monospace" }}>
+                    DEL
+                  </button>
+                </div>
+              )}
             </div>
           ))}
         </div>
@@ -677,6 +684,7 @@ function ConsultLog({ consults, onView, onStatusChange, admin }) {
     </div>
   );
 }
+
 
 function Analytics({ consults }) {
   const serviceCounts = (() => { const c = {}; consults.forEach(r => { c[r.consultedService] = (c[r.consultedService] || 0) + 1; }); return Object.entries(c).sort((a, b) => b[1] - a[1]).slice(0, 10); })();
