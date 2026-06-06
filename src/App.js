@@ -187,8 +187,7 @@ function LandingPage({ setPage }) {
             AMH → KFSH-R RIYADH · TELECONSULTATION REGISTRY
           </div>
           <h1 className="fade-up-1" style={{ color: "#fff", fontFamily: "'Playfair Display', serif", fontSize: 52, fontWeight: 800, lineHeight: 1.1, marginBottom: 24 }}>
-            Every Consult.<br />Tracked. Justified.<br />Analyzed.
-          </h1>
+    
           <p className="fade-up-2" style={{ color: "rgba(255,255,255,0.65)", fontSize: 17, lineHeight: 1.7, marginBottom: 44 }}>
             A secure platform for Al-Maathar Hospital physicians to log outbound consultations to King Faisal Specialist Hospital, track outcomes, and generate strategic hiring insights.
           </p>
