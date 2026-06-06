@@ -133,7 +133,8 @@ function TopBar({ tabs, activeTab, setActiveTab }) {
       <div style={{ maxWidth: 1100, margin: "0 auto", padding: "0 24px" }}>
         <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", height: 64 }}>
           <div style={{ display: "flex", alignItems: "center", gap: 14 }}>
-            <div style={{ width: 38, height: 38, background: "rgba(255,255,255,0.15)", borderRadius: 10, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 18 }}>AMH</div>
+            <div style={{ width: 38, height: 38, background: "rgba(255,255,255,0.15)", borderRadius: 10, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 18 }}><img src="/logo.jpg" alt="AMH" style={{height: 36}} /></
+/div>
             <div>
               <div style={{ color: "#fff", fontFamily: "'Playfair Display', serif", fontSize: 17, fontWeight: 800, lineHeight: 1.1 }}>Consult Command Center</div>
               <div style={{ color: AMH.light, fontSize: 10, fontFamily: "'DM Mono', monospace", letterSpacing: "0.1em" }}>AL-MAATHAR HOSPITAL · AMH→KFSH-R</div>
@@ -173,7 +174,8 @@ function LandingPage({ setPage }) {
   return (
     <div style={{ minHeight: "100vh", background: `linear-gradient(135deg, ${AMH.green} 0%, #0f3d23 60%, #071f12 100%)`, display: "flex", flexDirection: "column" }}>
       <div style={{ padding: "24px 40px", display: "flex", alignItems: "center", gap: 12 }}>
-        <div style={{ width: 42, height: 42, background: "rgba(255,255,255,0.1)", borderRadius: 12, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 22 }}>AMH</div>
+        <div style={{ width: 42, height: 42, background: "rgba(255,255,255,0.1)", borderRadius: 12, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 22 }}><img src="/logo.jpg" alt="AMH" style={{height: 36}} /></
+/div>
         <div>
           <div style={{ color: "#fff", fontFamily: "'Playfair Display', serif", fontSize: 18, fontWeight: 800 }}>Consult Command Center</div>
           <div style={{ color: "rgba(255,255,255,0.5)", fontSize: 10, fontFamily: "'DM Mono', monospace", letterSpacing: "0.12em" }}>AL-MAATHAR HOSPITAL</div>
@@ -949,7 +951,8 @@ function AuthFormShell({ title, subtitle, children, setPage, showBack }) {
     <div style={{ minHeight: "100vh", background: `linear-gradient(135deg, ${AMH.green} 0%, #0f3d23 100%)`, display: "flex", alignItems: "center", justifyContent: "center", padding: 24 }}>
       <div className="fade-up" style={{ width: "100%", maxWidth: 440 }}>
         <div style={{ textAlign: "center", marginBottom: 28 }}>
-          <div style={{ fontSize: 36, marginBottom: 8 }}>AMH</div>
+          <div style={{ fontSize: 36, marginBottom: 8 }}><img src="/logo.jpg" alt="AMH" style={{height: 36}} /></
+/div>
           <div style={{ color: "#fff", fontFamily: "'Playfair Display', serif", fontSize: 26, fontWeight: 800 }}>{title}</div>
           {subtitle && <div style={{ color: "rgba(255,255,255,0.6)", fontSize: 13, marginTop: 6 }}>{subtitle}</div>}
         </div>
