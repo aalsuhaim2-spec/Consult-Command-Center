@@ -190,7 +190,7 @@ function LandingPage({ setPage }) {
             Teleconsultation Documentation<br />for Al-Maathar Hospital.
           </h1>
           <p className="fade-up-2" style={{ color: "rgba(255,255,255,0.65)", fontSize: 17, lineHeight: 1.7, marginBottom: 44 }}>
-            A secure platform for Al-Maathar Hospital physicians to log outbound consultations to King Faisal Specialist Hospital, track outcomes, and generate strategic hiring insights.
+            A secure platform for Al-Maathar Hospital physicians to log outbound consultations to King Faisal Specialist Hospital
           </p>
           <div className="fade-up-3" style={{ display: "flex", gap: 14, justifyContent: "center", flexWrap: "wrap" }}>
             <button className="btn-primary" onClick={() => setPage("login")} style={{ padding: "14px 40px", fontSize: 15 }}>Sign In →</button>
