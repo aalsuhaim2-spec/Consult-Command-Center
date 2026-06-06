@@ -428,6 +428,7 @@ function AdminDashboard({ setPage }) {
     { id: "analytics", label: "ANALYTICS" },
     { id: "requests", label: `ACCESS REQUESTS${allRequests.length > 0 ? ` (${allRequests.length})` : ""}` },
     { id: "users", label: "USERS" },
+{ id: "deleted", label: "DELETED RECORDS" },
   ];
 
   return (
@@ -443,6 +444,7 @@ function AdminDashboard({ setPage }) {
         {tab === "analytics" && <Analytics consults={allConsults} />}
         {tab === "requests" && <AccessRequests refresh={refresh} />}
         {tab === "users" && <UserManager refresh={refresh} />}
+{tab === "deleted" && <DeletedRecords consults={allConsults} refresh={refresh} />}
       </div>
       {viewConsult && <ConsultDetailOverlay consult={viewConsult} onClose={() => setViewConsult(null)} admin onStatusChange={(id, status) => {
         const all = store.get("ccc_consults") || [];
@@ -1013,6 +1015,51 @@ function DetailRow({ label, value }) {
     <div style={{ display: "flex", gap: 12, padding: "7px 0", borderBottom: `1px solid ${AMH.pale}`, alignItems: "baseline" }}>
       <span style={{ fontFamily: "'DM Mono', monospace", fontSize: 10, color: "#aaa", minWidth: 160, letterSpacing: "0.08em" }}>{label.toUpperCase()}</span>
       <span style={{ fontSize: 14 }}>{value}</span>
+    </div>
+  );
+}
+function DeletedRecords({ consults, refresh }) {
+  const deleted = consults.filter(c => c.status === "Deleted");
+
+  function handleRestore(id) {
+    const all = store.get("ccc_consults") || [];
+    store.set("ccc_consults", all.map(c => c.id === id ? { ...c, status: "Open", deletedAt: null, deleteReason: null } : c));
+    refresh();
+  }
+
+  function handlePermanentDelete(id) {
+    if (!window.confirm("Permanently delete? This cannot be undone.")) return;
+    const all = store.get("ccc_consults") || [];
+    store.set("ccc_consults", all.filter(c => c.id !== id));
+    refresh();
+  }
+
+  return (
+    <div className="fade-up">
+      <h2 style={{ fontFamily: "'Playfair Display', serif", fontSize: 26, color: AMH.green, marginBottom: 4 }}>Deleted Records</h2>
+      <p style={{ color: "#888", fontSize: 13, marginBottom: 24 }}>Audit trail of all deleted consults. Restore or permanently remove.</p>
+      {deleted.length === 0 ? (
+        <div className="card" style={{ padding: 48, textAlign: "center", color: "#aaa", fontStyle: "italic" }}>No deleted records.</div>
+      ) : (
+        <div className="card" style={{ overflow: "hidden" }}>
+          <div style={{ display: "grid", gridTemplateColumns: "90px 100px 1fr 1fr 1fr 140px", padding: "10px 16px", background: "#dc2626", color: "#fff", fontFamily: "'DM Mono', monospace", fontSize: 10, letterSpacing: "0.08em", gap: 8 }}>
+            <div>DATE</div><div>MRN</div><div>DOCTOR</div><div>SERVICE</div><div>REASON</div><div>ACTIONS</div>
+          </div>
+          {deleted.map((c, i) => (
+            <div key={c.id} style={{ display: "grid", gridTemplateColumns: "90px 100px 1fr 1fr 1fr 140px", padding: "13px 16px", borderBottom: `1px solid ${AMH.light}`, background: i % 2 === 0 ? "#fff5f5" : "#fff", alignItems: "center", gap: 8 }}>
+              <div style={{ fontFamily: "'DM Mono', monospace", fontSize: 11, color: "#888" }}>{c.date}</div>
+              <div style={{ fontWeight: 700, fontSize: 14 }}>{c.mrn}</div>
+              <div style={{ fontSize: 12, color: "#555" }}>{c.doctorName}</div>
+              <div style={{ fontSize: 13, color: AMH.green }}>{c.consultedService}</div>
+              <div style={{ fontSize: 12, color: "#888", fontStyle: "italic" }}>{c.deleteReason || "—"}</div>
+              <div style={{ display: "flex", gap: 6 }}>
+                <button className="btn-success" onClick={() => handleRestore(c.id)} style={{ padding: "4px 10px", fontSize: 11 }}>Restore</button>
+                <button className="btn-danger" onClick={() => handlePermanentDelete(c.id)} style={{ padding: "4px 10px", fontSize: 11 }}>Remove</button>
+              </div>
+            </div>
+          ))}
+        </div>
+      )}
     </div>
   );
 }
