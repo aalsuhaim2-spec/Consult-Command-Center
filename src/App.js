@@ -198,21 +198,7 @@ function LandingPage({ setPage }) {
           </div>
         </div>
       </div>
-      <div style={{ borderTop: "1px solid rgba(255,255,255,0.1)", padding: "32px 40px" }}>
-        <div style={{ maxWidth: 900, margin: "0 auto", display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 32 }}>
-          {[
-            ["🔐", "Role-Based Access", "Doctors submit. Admins oversee. Viewers analyze."],
-            ["📋", "Full Consult Audit", "Capture reason, justification, no-transfer rationale, and response quality."],
-            ["📊", "Strategic Analytics", "Identify which services are consulted most — build the case to hire in-house."],
-          ].map(([icon, title, desc]) => (
-            <div key={title} style={{ textAlign: "center" }}>
-              <div style={{ fontSize: 28, marginBottom: 10 }}>{icon}</div>
-              <div style={{ color: "#fff", fontWeight: 600, fontSize: 15, marginBottom: 6 }}>{title}</div>
-              <div style={{ color: "rgba(255,255,255,0.5)", fontSize: 13, lineHeight: 1.6 }}>{desc}</div>
-            </div>
-          ))}
-        </div>
-      </div>
+      
     </div>
   );
 }
